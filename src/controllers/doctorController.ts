@@ -20,12 +20,15 @@ export const createDoctor = async (req: Request, res: Response): Promise<void> =
       role: 'doctor',
     });
     res.status(201).json(user);
+    return;
   } catch (error: any) {
     if (error.code === '23505') {
       res.status(409).json({ error: 'Email already exists' });
+      return;
     } else {
       console.error('Error creating doctor:', error);
       res.status(500).json({ error: 'Failed to create doctor' });
+      return;
     }
   }
 };
@@ -34,9 +37,11 @@ export const getDoctors = async (req: Request, res: Response): Promise<void> => 
   try {
     const doctors = await getDoctorsModel();
     res.json(doctors);
+    return;
   } catch (error) {
     console.error('Error fetching doctors:', error);
     res.status(500).json({ error: 'Failed to fetch doctors' });
+    return;
   }
 };
 
@@ -49,9 +54,11 @@ export const getDoctorById = async (req: Request, res: Response): Promise<void> 
       return;
     }
     res.json(doctor);
+    return;
   } catch (error) {
     console.error('Error fetching doctor by id:', error);
     res.status(500).json({ error: 'Failed to fetch doctor' });
+    return;
   }
 };
 
@@ -71,12 +78,15 @@ export const updateDoctorById = async (req: Request, res: Response): Promise<voi
       return;
     }
     res.json(doctor);
+    return;
   } catch (error: any) {
     if (error.code === '23505') {
       res.status(409).json({ error: 'Email already exists' });
+      return;
     } else {
       console.error('Error updating doctor by id:', error);
       res.status(500).json({ error: 'Failed to update doctor' });
+      return;
     }
   }
 }; 

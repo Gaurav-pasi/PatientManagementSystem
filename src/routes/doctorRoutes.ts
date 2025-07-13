@@ -5,11 +5,85 @@ import { Request, Response, NextFunction, RequestHandler } from 'express';
 
 const router = Router();
 
+/**
+ * @swagger
+ * /doctors:
+ *   post:
+ *     summary: Create a new doctor
+ *     tags: [Doctors]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - full_name
+ *               - email
+ *             properties:
+ *               full_name:
+ *                 type: string
+ *                 description: Full name of the doctor
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Email address
+ *               password:
+ *                 type: string
+ *                 minLength: 6
+ *                 description: Password (optional)
+ *               phone_number:
+ *                 type: string
+ *                 description: Phone number
+ *               gender:
+ *                 type: string
+ *                 enum: [male, female, other]
+ *                 description: Gender
+ *               dob:
+ *                 type: string
+ *                 format: date
+ *                 description: Date of birth
+ *               specialization:
+ *                 type: string
+ *                 description: Medical specialization
+ *               license_number:
+ *                 type: string
+ *                 description: Medical license number
+ *               experience_years:
+ *                 type: integer
+ *                 description: Years of experience
+ *     responses:
+ *       201:
+ *         description: Doctor created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Doctor'
+ *       400:
+ *         description: Validation error
+ *       500:
+ *         description: Server error
+ *   get:
+ *     summary: Get all doctors
+ *     tags: [Doctors]
+ *     responses:
+ *       200:
+ *         description: List of doctors
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Doctor'
+ *       500:
+ *         description: Server error
+ */
+
 const validateDoctor: RequestHandler[] = [
   body('full_name').notEmpty().withMessage('Full name is required'),
   body('email').isEmail().withMessage('Valid email is required'),
   body('password').optional().isLength({ min: 6 }).withMessage('Password must be at least 6 chars'),
-  (req, res, next) => {
+  (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(400).json({ errors: errors.array() });
@@ -19,6 +93,92 @@ const validateDoctor: RequestHandler[] = [
   }
 ];
 
+/**
+ * @swagger
+ * /doctors/{id}:
+ *   get:
+ *     summary: Get a doctor by ID
+ *     tags: [Doctors]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Doctor ID
+ *     responses:
+ *       200:
+ *         description: Doctor retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Doctor'
+ *       404:
+ *         description: Doctor not found
+ *       500:
+ *         description: Server error
+ *   put:
+ *     summary: Update a doctor by ID
+ *     tags: [Doctors]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Doctor ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               full_name:
+ *                 type: string
+ *                 description: Full name of the doctor
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Email address
+ *               password:
+ *                 type: string
+ *                 minLength: 6
+ *                 description: Password (optional)
+ *               phone_number:
+ *                 type: string
+ *                 description: Phone number
+ *               gender:
+ *                 type: string
+ *                 enum: [male, female, other]
+ *                 description: Gender
+ *               dob:
+ *                 type: string
+ *                 format: date
+ *                 description: Date of birth
+ *               specialization:
+ *                 type: string
+ *                 description: Medical specialization
+ *               license_number:
+ *                 type: string
+ *                 description: Medical license number
+ *               experience_years:
+ *                 type: integer
+ *                 description: Years of experience
+ *     responses:
+ *       200:
+ *         description: Doctor updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Doctor'
+ *       400:
+ *         description: Validation error
+ *       404:
+ *         description: Doctor not found
+ *       500:
+ *         description: Server error
+ */
 router.post('/', ...validateDoctor, createDoctor);
 router.get('/:id', getDoctorById);
 router.get('/', getDoctors);

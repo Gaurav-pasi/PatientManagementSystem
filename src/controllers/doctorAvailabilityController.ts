@@ -6,9 +6,11 @@ export const getAvailability = async (req: Request, res: Response): Promise<void
     const { id } = req.params;
     const slots = await getAvailabilityByDoctorId(id);
     res.json(slots);
+    return;
   } catch (error) {
     console.error('Error fetching availability:', error);
     res.status(500).json({ error: 'Failed to fetch availability' });
+    return;
   }
 };
 
@@ -22,8 +24,10 @@ export const setAvailability = async (req: Request, res: Response): Promise<void
     }
     const result = await setAvailabilityByDoctorId(id, slots);
     res.status(201).json(result);
+    return;
   } catch (error) {
     console.error('Error setting availability:', error);
     res.status(500).json({ error: 'Failed to set availability' });
+    return;
   }
 }; 

@@ -20,12 +20,15 @@ export const createPatient = async (req: Request, res: Response): Promise<void> 
       role: 'patient',
     });
     res.status(201).json(user);
+    return;
   } catch (error: any) {
     if (error.code === '23505') {
       res.status(409).json({ error: 'Email already exists' });
+      return;
     } else {
       console.error('Error creating patient:', error);
       res.status(500).json({ error: 'Failed to create patient' });
+      return;
     }
   }
 };
@@ -46,12 +49,15 @@ export const updatePatientById = async (req: Request, res: Response): Promise<vo
       return;
     }
     res.json(patient);
+    return;
   } catch (error: any) {
     if (error.code === '23505') {
       res.status(409).json({ error: 'Email already exists' });
+      return;
     } else {
       console.error('Error updating patient by id:', error);
       res.status(500).json({ error: 'Failed to update patient' });
+      return;
     }
   }
 };
@@ -65,8 +71,10 @@ export const getPatientById = async (req: Request, res: Response): Promise<void>
       return;
     }
     res.json(patient);
+    return;
   } catch (error) {
     console.error('Error fetching patient by id:', error);
     res.status(500).json({ error: 'Failed to fetch patient' });
+    return;
   }
 }; 

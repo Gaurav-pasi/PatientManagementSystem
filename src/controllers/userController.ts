@@ -15,8 +15,10 @@ export const uploadUserDocs = async (req: MulterRequest, res: Response): Promise
     // const appwriteResponse = await appwriteClient.uploadFile(req.file);
     // Save file metadata to DB if needed
     res.status(201).json({ message: 'File uploaded successfully', file: req.file });
+    return;
   } catch (error) {
     console.error('Error uploading file:', error);
     res.status(500).json({ error: 'Failed to upload file' });
+    return;
   }
 }; 

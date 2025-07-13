@@ -11,8 +11,10 @@ export const getFile = async (req: Request, res: Response): Promise<void> => {
     }
     // For download, you might want to redirect or send the file_url
     res.json({ file_url: file.file_url, file_name: file.file_name });
+    return;
   } catch (error) {
     console.error('Error fetching file:', error);
     res.status(500).json({ error: 'Failed to fetch file' });
+    return;
   }
 }; 
