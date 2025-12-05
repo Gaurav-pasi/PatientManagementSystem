@@ -148,13 +148,14 @@ export function Patients() {
       <motion.div variants={itemVariants} className="mb-6">
         <Card className="p-4">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none z-10" />
             <input
               type="text"
               placeholder="Search patients by name or email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="input-field pl-12"
+              className="input-field"
+              style={{ paddingLeft: '2.75rem' }}
             />
           </div>
         </Card>

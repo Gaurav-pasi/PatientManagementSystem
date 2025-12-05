@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -49,26 +48,6 @@ const stats = [
   { value: '99%', label: 'Satisfaction' },
 ];
 
-const testimonials = [
-  {
-    name: 'Sarah Johnson',
-    role: 'Patient',
-    content: 'MediCare made managing my health so much easier. The interface is intuitive and booking appointments is a breeze!',
-    rating: 5,
-  },
-  {
-    name: 'Dr. Michael Chen',
-    role: 'Cardiologist',
-    content: 'As a doctor, this platform has streamlined my practice. Managing schedules and patient records has never been easier.',
-    rating: 5,
-  },
-  {
-    name: 'Emily Davis',
-    role: 'Patient',
-    content: 'I love how I can access my medical history anytime. The reminders for appointments are really helpful!',
-    rating: 5,
-  },
-];
 
 export function Home() {
   return (
@@ -292,54 +271,6 @@ export function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-24 bg-gradient-to-br from-primary-600 to-primary-800">
-        <div className="page-container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-white mb-4">
-              What Our Users Say
-            </h2>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">
-              Join thousands of satisfied patients and healthcare providers.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20"
-              >
-                <div className="flex items-center gap-1 text-yellow-400 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
-                  ))}
-                </div>
-                <p className="text-white/90 mb-6">{testimonial.content}</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white font-bold">
-                    {testimonial.name[0]}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-white">{testimonial.name}</p>
-                    <p className="text-sm text-white/60">{testimonial.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-24">
         <div className="page-container">
@@ -388,7 +319,7 @@ export function Home() {
               <span className="text-xl font-bold text-white">MediCare</span>
             </div>
             <p className="text-slate-400 text-sm">
-              © 2024 MediCare. All rights reserved.
+              © 2026 MediCare. All rights reserved.
             </p>
           </div>
         </div>

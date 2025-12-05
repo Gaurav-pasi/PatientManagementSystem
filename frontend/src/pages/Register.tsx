@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -9,7 +9,6 @@ import {
   Lock,
   User,
   Phone,
-  Calendar,
   Stethoscope,
   ArrowRight,
   Check,
@@ -45,7 +44,6 @@ export function Register() {
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [step, setStep] = useState(1);
 
   const {
     register,
@@ -222,7 +220,7 @@ export function Register() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <Input
                 label="Full Name"
-                placeholder="John Doe"
+                placeholder="Enter your full name"
                 icon={<User className="w-5 h-5" />}
                 error={errors.full_name?.message}
                 {...register('full_name')}
@@ -231,7 +229,7 @@ export function Register() {
               <Input
                 label="Email Address"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="Enter your email"
                 icon={<Mail className="w-5 h-5" />}
                 error={errors.email?.message}
                 {...register('email')}
@@ -260,7 +258,7 @@ export function Register() {
               <Input
                 label="Phone Number"
                 type="tel"
-                placeholder="+1 (555) 000-0000"
+                placeholder="Enter your phone number"
                 icon={<Phone className="w-5 h-5" />}
                 {...register('phone_number')}
               />

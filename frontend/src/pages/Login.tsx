@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -152,7 +152,7 @@ export function Login() {
               <Input
                 label="Email Address"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="Enter your email"
                 icon={<Mail className="w-5 h-5" />}
                 error={errors.email?.message}
                 {...register('email')}
@@ -161,7 +161,7 @@ export function Login() {
               <Input
                 label="Password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder="••••••••"
                 icon={<Lock className="w-5 h-5" />}
                 error={errors.password?.message}
                 {...register('password')}
